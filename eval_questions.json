@@ -1,0 +1,62 @@
+[
+  {
+    "id": "q01",
+    "question": "What is the pePLRNN and what problem does it solve?",
+    "expected_answer": "The parameter-evolving piecewise-linear RNN (pePLRNN) extends PLRNN models to handle non-autonomous, non-stationary dynamical systems. It introduces time-dependent snapshot parameters with continuity regularization to reconstruct systems where parameters evolve over time.",
+    "category": "architecture"
+  },
+  {
+    "id": "q02",
+    "question": "How does the thesis decompose non-autonomy?",
+    "expected_answer": "Non-autonomy is decomposed into two separable sources operating on different timescales: fast external inputs (sensory stimuli) and slow internal parameter changes (synaptic plasticity). Each combination is treated as a locally autonomous snapshot system.",
+    "category": "methodology"
+  },
+  {
+    "id": "q03",
+    "question": "What is the main finding about how the brain implements rule learning?",
+    "expected_answer": "Rule learning is implemented via stimulus-dependent attracting region relocation in neural state space, not through creation of new stable attractors. The existing attracting region shifts location to redirect neural trajectories toward the correct decision under the new rule.",
+    "category": "results"
+  },
+  {
+    "id": "q04",
+    "question": "Do neural transitions during learning happen gradually or abruptly?",
+    "expected_answer": "Neural and dynamical transitions are abrupt and precede behavioral change points. The brain reorganizes its computational architecture before behavior visibly changes, supporting the sudden insight hypothesis.",
+    "category": "results"
+  },
+  {
+    "id": "q05",
+    "question": "What is the mirage reconstruction problem?",
+    "expected_answer": "Mirage reconstruction occurs when a model produces accurate trajectory fits but infers a completely wrong mechanism. The model exploits input structure to bypass learning the true internal dynamics. Input design fundamentally determines the reconstructed dynamical mechanism.",
+    "category": "methodology"
+  },
+  {
+    "id": "q06",
+    "question": "How was the pePLRNN validated on synthetic benchmarks?",
+    "expected_answer": "The pePLRNN was validated on chaotic benchmarks including logistic map bifurcation diagrams and bursting neuron models, as well as task-trained RNNs, before application to neural recordings.",
+    "category": "validation"
+  },
+  {
+    "id": "q07",
+    "question": "What validation framework was designed for non-stationary data?",
+    "expected_answer": "A five-criterion validation framework was designed that exploits behaviorally stable periods as approximate stationarity windows, testing reconstruction accuracy, decoding preservation, non-stationarity capture, generalization, and physiological plausibility.",
+    "category": "validation"
+  },
+  {
+    "id": "q08",
+    "question": "How was effective connectivity estimated in the thesis?",
+    "expected_answer": "Effective connectivity was estimated through Jacobian product analysis along simulated trajectories to derive connectivity distributions, then similarity analysis was used to extract graph structure and identify functional assemblies.",
+    "category": "methodology"
+  },
+  {
+    "id": "q09",
+    "question": "What role do initial conditions play in rule learning?",
+    "expected_answer": "Changes in initial conditions have no significant impact on rule learning. Parameter changes alone drive the behavioral shift. This was demonstrated through counterfactual simulations swapping initial conditions between rules while holding parameters fixed.",
+    "category": "results"
+  },
+  {
+    "id": "q10",
+    "question": "How do task-trained RNN mechanisms differ from neural recording mechanisms?",
+    "expected_answer": "Both use input-driven attractor dynamics, but task-trained RNNs converge to fixed points while neural data shows complex, possibly chaotic, limit sets that modulate trajectory direction without enforcing convergence.",
+    "category": "results"
+  }
+]
