@@ -19,11 +19,11 @@ LLM_MODEL = "claude-sonnet-4-20250514"
 LLM_MAX_TOKENS = 1024
 
 # --- Chunking ---
-CHUNK_SIZE = 3500
-CHUNK_OVERLAP = 875
+CHUNK_SIZE = 3000
+CHUNK_OVERLAP = 700
 
 # --- Retrieval ---
-TOP_K = 8
+TOP_K = 6
 
 # --- System Prompt ---
 SYSTEM_PROMPT = """You are a research assistant that answers questions about a PhD thesis on 
