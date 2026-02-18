@@ -2,7 +2,7 @@
 
 import anthropic
 import chromadb
-import voyageai
+import httpx
 
 import config
 
@@ -14,10 +14,15 @@ def get_collection():
 
 
 def embed_query(query: str) -> list[float]:
-    """Embed a query using Voyage AI."""
-    client = voyageai.Client(api_key=config.VOYAGE_API_KEY)
-    result = client.embed([query], model=config.EMBEDDING_MODEL, input_type="query")
-    return result.embeddings[0]
+    """Embed a query using Voyage AI REST API."""
+    resp = httpx.post(
+        "https://api.voyageai.com/v1/embeddings",
+        headers={"Authorization": f"Bearer {config.VOYAGE_API_KEY}"},
+        json={"input": [query], "model": config.EMBEDDING_MODEL, "input_type": "query"},
+        timeout=30,
+    )
+    resp.raise_for_status()
+    return resp.json()["data"][0]["embedding"]
 
 
 def retrieve(query: str, top_k: int = config.TOP_K) -> list[dict]:

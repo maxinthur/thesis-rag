@@ -11,7 +11,7 @@ import time
 from pathlib import Path
 
 import chromadb
-import voyageai
+import httpx
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -63,13 +63,19 @@ def chunk_documents(
 
 
 def embed_texts(texts: list[str], batch_size: int = 128) -> list[list[float]]:
-    """Embed texts using Voyage AI, handling batching."""
-    client = voyageai.Client(api_key=config.VOYAGE_API_KEY)
+    """Embed texts using Voyage AI REST API."""
     all_embeddings = []
     for i in range(0, len(texts), batch_size):
         batch = texts[i : i + batch_size]
-        result = client.embed(batch, model=config.EMBEDDING_MODEL, input_type="document")
-        all_embeddings.extend(result.embeddings)
+        resp = httpx.post(
+            "https://api.voyageai.com/v1/embeddings",
+            headers={"Authorization": f"Bearer {config.VOYAGE_API_KEY}"},
+            json={"input": batch, "model": config.EMBEDDING_MODEL, "input_type": "document"},
+            timeout=60,
+        )
+        resp.raise_for_status()
+        data = resp.json()["data"]
+        all_embeddings.extend([d["embedding"] for d in data])
         if len(texts) > batch_size:
             print(f"    Embedded {min(i + batch_size, len(texts))}/{len(texts)}")
     return all_embeddings
