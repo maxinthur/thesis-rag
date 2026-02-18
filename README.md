@@ -15,14 +15,14 @@ User Question
      │
      ▼
 ┌─────────────┐     ┌──────────────────┐
-│  Embedding   │────▶│   ChromaDB        │
-│  (MiniLM)    │     │   (HNSW, cosine)  │
+│  Embedding  │───▶│   ChromaDB       │
+│  (MiniLM)   │     │   (HNSW, cosine) │
 └─────────────┘     └────────┬─────────┘
                              │ top-k chunks
                              ▼
                     ┌──────────────────┐
-                    │  Claude (Sonnet)  │
-                    │  + System Prompt  │
+                    │  Claude (Sonnet) │
+                    │  + System Prompt │
                     └────────┬─────────┘
                              │
                              ▼

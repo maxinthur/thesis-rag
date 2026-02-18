@@ -8,9 +8,10 @@ PROJECT_ROOT = Path(__file__).parent
 DATA_DIR = PROJECT_ROOT / "data"
 CHROMA_DIR = PROJECT_ROOT / "chroma_db"
 
-# --- Embedding Model (local, no API key needed) ---
-EMBEDDING_MODEL = "all-MiniLM-L6-v2"
-EMBEDDING_DIM = 384
+# --- Embedding Model (Voyage AI) ---
+VOYAGE_API_KEY = os.getenv("VOYAGE_API_KEY", "")
+EMBEDDING_MODEL = "voyage-3-large"
+EMBEDDING_DIM = 1024
 
 # --- LLM ---
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
@@ -18,11 +19,11 @@ LLM_MODEL = "claude-sonnet-4-20250514"
 LLM_MAX_TOKENS = 1024
 
 # --- Chunking ---
-CHUNK_SIZE = 800
-CHUNK_OVERLAP = 200
+CHUNK_SIZE = 3500
+CHUNK_OVERLAP = 875
 
 # --- Retrieval ---
-TOP_K = 5
+TOP_K = 8
 
 # --- System Prompt ---
 SYSTEM_PROMPT = """You are a research assistant that answers questions about a PhD thesis on 

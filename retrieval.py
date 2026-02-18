@@ -2,7 +2,7 @@
 
 import anthropic
 import chromadb
-from chromadb.utils import embedding_functions
+import voyageai
 
 import config
 
@@ -10,10 +10,14 @@ import config
 def get_collection():
     """Get the ChromaDB thesis collection."""
     client = chromadb.PersistentClient(path=str(config.CHROMA_DIR))
-    ef = embedding_functions.SentenceTransformerEmbeddingFunction(
-        model_name=config.EMBEDDING_MODEL
-    )
-    return client.get_collection(name="thesis", embedding_function=ef)
+    return client.get_collection(name="thesis")
+
+
+def embed_query(query: str) -> list[float]:
+    """Embed a query using Voyage AI."""
+    client = voyageai.Client(api_key=config.VOYAGE_API_KEY)
+    result = client.embed([query], model=config.EMBEDDING_MODEL, input_type="query")
+    return result.embeddings[0]
 
 
 def retrieve(query: str, top_k: int = config.TOP_K) -> list[dict]:
@@ -22,7 +26,8 @@ def retrieve(query: str, top_k: int = config.TOP_K) -> list[dict]:
     Returns a list of dicts with keys: text, page, score, rank.
     """
     collection = get_collection()
-    results = collection.query(query_texts=[query], n_results=top_k)
+    query_embedding = embed_query(query)
+    results = collection.query(query_embeddings=[query_embedding], n_results=top_k)
 
     chunks = []
     for i in range(len(results["documents"][0])):

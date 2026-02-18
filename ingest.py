@@ -11,7 +11,7 @@ import time
 from pathlib import Path
 
 import chromadb
-from chromadb.utils import embedding_functions
+import voyageai
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -62,31 +62,42 @@ def chunk_documents(
     return chunks
 
 
+def embed_texts(texts: list[str], batch_size: int = 128) -> list[list[float]]:
+    """Embed texts using Voyage AI, handling batching."""
+    client = voyageai.Client(api_key=config.VOYAGE_API_KEY)
+    all_embeddings = []
+    for i in range(0, len(texts), batch_size):
+        batch = texts[i : i + batch_size]
+        result = client.embed(batch, model=config.EMBEDDING_MODEL, input_type="document")
+        all_embeddings.extend(result.embeddings)
+        if len(texts) > batch_size:
+            print(f"    Embedded {min(i + batch_size, len(texts))}/{len(texts)}")
+    return all_embeddings
+
+
 def store_chunks(chunks: list[dict], reset: bool = False) -> None:
-    """Embed chunks and store in ChromaDB."""
+    """Embed chunks via Voyage AI and store in ChromaDB."""
     client = chromadb.PersistentClient(path=str(config.CHROMA_DIR))
-    ef = embedding_functions.SentenceTransformerEmbeddingFunction(
-        model_name=config.EMBEDDING_MODEL
-    )
 
     if reset:
         try:
             client.delete_collection("thesis")
-        except ValueError:
+        except Exception:
             pass
 
     collection = client.get_or_create_collection(
         name="thesis",
-        embedding_function=ef,
         metadata={"hnsw:space": "cosine"},
     )
 
-    # Batch insert (ChromaDB handles batching internally)
     ids = [f"chunk_{i:04d}" for i in range(len(chunks))]
     texts = [c["text"] for c in chunks]
     metadatas = [{"page": c["page"], "source": c["source"], "chunk_index": c["chunk_index"]} for c in chunks]
 
-    collection.add(documents=texts, ids=ids, metadatas=metadatas)
+    print(f"    Embedding {len(texts)} chunks via Voyage AI ({config.EMBEDDING_MODEL})...")
+    embeddings = embed_texts(texts)
+
+    collection.add(documents=texts, ids=ids, metadatas=metadatas, embeddings=embeddings)
     print(f"  Stored {len(chunks)} chunks in ChromaDB (HNSW, cosine)")
 
 
