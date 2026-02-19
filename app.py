@@ -23,7 +23,7 @@ st.set_page_config(
 )
 
 # ── Authentication ───────────────────────────────────────────
-APP_PASSWORD = os.getenv("APP_PASSWORD", "thesis2025")
+APP_PASSWORD = os.getenv("APP_PASSWORD", "thesisRAG2025!")
 
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False

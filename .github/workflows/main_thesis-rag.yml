@@ -1,4 +1,4 @@
-name: Build and deploy to Azure Container Apps
+name: Deploy to Azure Container Apps
 
 on:
   push:
@@ -6,12 +6,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
-      - uses: actions/checkout@v4
-
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -19,17 +20,9 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_C28A69ED243E491492526A7F2C4EF21D }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_97C7A5E63C5C4DA6AB0A91D4674481BA }}
 
-      - name: Build and push to ACR
-        run: |
-          az acr build \
-            --registry thesisragcr \
-            --image thesis-rag:${{ github.sha }} \
-            --image thesis-rag:latest \
-            .
-
-      - name: Deploy to Container Apps
+      - name: Deploy latest image to Container App
         run: |
           az containerapp update \
             --name thesis-rag \
             --resource-group thesis-rag-rg \
-            --image thesisragcr.azurecr.io/thesis-rag:${{ github.sha }}
+            --image thesisragcr.azurecr.io/thesis-rag:latest

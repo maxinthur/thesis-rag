@@ -16,11 +16,11 @@ EMBEDDING_DIM = 1024
 # --- LLM ---
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 LLM_MODEL = "claude-sonnet-4-20250514"
-LLM_MAX_TOKENS = 1024
+LLM_MAX_TOKENS = 2048
 
 # --- Chunking ---
 CHUNK_SIZE = 3000
-CHUNK_OVERLAP = 700
+CHUNK_OVERLAP = 600
 
 # --- Retrieval ---
 TOP_K = 6

@@ -3,7 +3,7 @@
   "top_k": 6,
   "aggregate_scores": {
     "retrieval_relevance": {
-      "mean": 0.92,
+      "mean": 0.93,
       "min": 0.8,
       "max": 1.0
     },
@@ -13,40 +13,40 @@
       "max": 1.0
     },
     "answer_completeness": {
-      "mean": 0.845,
+      "mean": 0.835,
       "min": 0.4,
       "max": 1.0
     },
     "hallucination_free": {
-      "mean": 0.965,
-      "min": 0.9,
+      "mean": 0.95,
+      "min": 0.8,
       "max": 1.0
     }
   },
   "category_scores": {
     "architecture": {
       "retrieval_relevance": 0.9,
-      "faithfulness": 1.0,
-      "answer_completeness": 0.95,
-      "hallucination_free": 1.0
+      "faithfulness": 0.95,
+      "answer_completeness": 0.85,
+      "hallucination_free": 0.9
     },
     "methodology": {
       "retrieval_relevance": 0.9,
-      "faithfulness": 0.95,
-      "answer_completeness": 0.833,
-      "hallucination_free": 0.917
+      "faithfulness": 0.983,
+      "answer_completeness": 0.817,
+      "hallucination_free": 0.967
     },
     "results": {
       "retrieval_relevance": 0.95,
       "faithfulness": 0.975,
       "answer_completeness": 0.8,
-      "hallucination_free": 0.975
+      "hallucination_free": 0.95
     },
     "validation": {
-      "retrieval_relevance": 0.9,
-      "faithfulness": 1.0,
-      "answer_completeness": 0.9,
-      "hallucination_free": 1.0
+      "retrieval_relevance": 0.95,
+      "faithfulness": 0.975,
+      "answer_completeness": 0.925,
+      "hallucination_free": 0.95
     }
   },
   "results": [
@@ -55,340 +55,340 @@
       "question": "What is the pePLRNN and what problem does it solve?",
       "category": "architecture",
       "expected_answer": "The parameter-evolving piecewise-linear RNN (pePLRNN) extends PLRNN models to handle non-autonomous, non-stationary dynamical systems. It introduces time-dependent snapshot parameters with continuity regularization to reconstruct systems where parameters evolve over time.",
-      "generated_answer": "Based on the provided context passages, the pePLRNN (parameter-evolving Piecewise Linear Recurrent Neural Network) is a computational method that extends dynamical systems reconstruction (DSR) to handle non-autonomous, time-varying neural dynamics.\n\n## What the pePLRNN is:\n\nThe pePLRNN is a model that reconstructs neural dynamics by formulating \"non-autonomous dynamics as a sequence of temporally local autonomous systems\" [3]. These local systems, called \"snapshot vector fields,\" approximate time-dependent vector fields within specific time segments, with smooth transitions enforced by continuity priors [3].\n\n## What problem it solves:\n\nThe pePLRNN addresses a fundamental limitation of classical DSR methods. As stated in passage [3]: \"Classical DSR methods typically rely on the assumption of time-invariance, where the geometry of the vector field are governed by fixed set of parameters. Such an assumption fails to hold the context of this experiment, where the underlying neural DS evolves in response to unexpected feedback, or in general biological systems which natural experience contextual modulation or drifts.\"\n\nSpecifically, the pePLRNN solves the problem of reconstructing neural dynamics in systems that are:\n- **Non-stationary** (changing over time)\n- **Non-autonomous** (influenced by external inputs)\n- **Learning-dependent** (evolving due to plasticity or adaptation)\n\n## Key capabilities:\n\nThe model enables a \"functional separation of the different sources of non-stationary into internally and externally induced transitions\" [3]. It can decompose non-autonomous dynamics into two distinct sources:\n1. Temporal changes in internal system parameters (e.g., reflecting plasticity)\n2. Modulation by external inputs (e.g., stimulus-driven perturbations)\n\nThis allows researchers to \"systematically isolate the contribution of DS variables, potentially contributing to the process of learning, into two distinct categories, namely changes in initial conditions and changes in system parameter\" [1].\n\nThe pePLRNN has been successfully applied to reconstruct neural dynamics underlying rule learning in both artificial RNNs and real neural recordings from rats' medial prefrontal cortex [4,5].",
+      "generated_answer": "Based on the provided context, the **pePLRNN (parameter-evolving Piecewise Linear Recurrent Neural Network)** is a computational method for reconstructing dynamical systems from neural data, specifically designed to address limitations of classical dynamical systems reconstruction (DSR) methods [3,4,5].\n\n## What problem does it solve?\n\nThe pePLRNN addresses a fundamental limitation of classical DSR approaches: **the assumption of time-invariance**. Classical methods assume that the geometry of vector fields is governed by a fixed set of parameters, but this assumption fails in biological systems that experience:\n- Contextual modulation or drifts\n- Ongoing internal or external fluctuations  \n- Learning-induced changes (like rule learning in animals) [3]\n\n## How does it work?\n\nThe pePLRNN solves this by **explicitly modeling time-dependent parameters**, enabling reconstruction of non-stationary neural systems. Its key innovation is formulating non-autonomous dynamics as \"a sequence of temporally local autonomous systems\" called **snapshot vector fields** [3,5].\n\nThe model provides a **twofold decomposition** of non-autonomous dynamics into:\n1. **Temporal changes in internal system parameters** (e.g., reflecting plasticity)\n2. **Modulation by external inputs** (e.g., stimulus-driven perturbations) [3,4]\n\n## Capabilities demonstrated:\n\nFrom the validation work, the pePLRNN can reconstruct:\n- Fixed-point attractors, complex limit cycles, and chaotic regimes\n- Multiple bifurcations within single datasets\n- Non-stationary dynamics in both task-trained RNNs and actual neural recordings from rats performing rule-learning tasks [4,5]\n\nThe method enables researchers to **use dynamical systems theory to describe how changes in behavior can be explained in terms of changes in temporal local vector fields governing neural state space** [4,5], making it particularly valuable for understanding learning and cognitive flexibility in the brain.",
       "retrieval_scores": [
         0.5601419806480408,
-        0.5542697310447693,
+        0.5512974262237549,
         0.5484871864318848,
-        0.5437086820602417,
+        0.5437293648719788,
         0.542999267578125,
         0.5399231314659119
       ],
       "eval_scores": {
         "retrieval_relevance": {
           "score": 0.9,
-          "reason": "All retrieved chunks directly discuss pePLRNN and its capabilities for reconstructing non-autonomous dynamical systems. They provide comprehensive information about what pePLRNN is and the problems it solves, though some chunks focus more on applications than core definition."
+          "reason": "All retrieved chunks are highly relevant to the question, providing detailed information about pePLRNN's definition, purpose, and the problems it solves. The chunks focus on the method's capabilities for non-autonomous dynamical systems reconstruction."
         },
         "faithfulness": {
-          "score": 1.0,
-          "reason": "Every claim in the generated answer is directly supported by the retrieved context, with appropriate citations to specific passages. The answer accurately quotes and paraphrases information from the source material without adding unsupported claims."
+          "score": 0.95,
+          "reason": "Nearly all claims in the answer are directly supported by the retrieved context, with proper citations. The answer accurately reflects the technical details about pePLRNN's approach to handling time-dependent parameters and non-stationary systems."
         },
         "answer_completeness": {
-          "score": 0.95,
-          "reason": "The answer covers all key points from the expected answer: defines pePLRNN as parameter-evolving piecewise-linear RNN, explains it handles non-autonomous/non-stationary systems, and mentions time-dependent parameters with continuity regularization. It provides even more detail than the expected answer about applications and capabilities."
+          "score": 0.85,
+          "reason": "The answer covers most key points from the expected answer including the extension to non-autonomous systems and time-dependent parameters. However, it doesn't explicitly mention 'piecewise-linear RNN' or 'continuity regularization' as stated in the expected answer."
         },
         "hallucination_free": {
-          "score": 1.0,
-          "reason": "The answer contains no fabricated information. All technical details, definitions, and claims are grounded in the provided context with proper citations to specific passages."
+          "score": 0.9,
+          "reason": "The answer stays very close to the provided context without adding fabricated information. All technical details and claims are grounded in the retrieved documents, though some interpretative language is used to synthesize the information."
         }
       },
-      "latency_s": 15.45
+      "latency_s": 16.62
     },
     {
       "id": "q02",
       "question": "How does the thesis decompose non-autonomy?",
       "category": "methodology",
       "expected_answer": "Non-autonomy is decomposed into two separable sources operating on different timescales: fast external inputs (sensory stimuli) and slow internal parameter changes (synaptic plasticity). Each combination is treated as a locally autonomous snapshot system.",
-      "generated_answer": "Based on the provided context, the thesis decomposes non-autonomy into two distinct conceptual sources through the pePLRNN model [1][2]:\n\n## Two Main Sources of Non-Autonomy\n\n1. **Temporal changes in internal system parameters** (e.g., reflecting plasticity) - This represents internally-driven changes where parameters θ(t) that govern the system evolve over time due to learning, synaptic changes, or neuromodulation [1][6].\n\n2. **Modulation by external inputs** (e.g., stimulus-driven perturbations) - This represents externally-driven changes through input signals that perturb the system [1][6].\n\n## Technical Implementation\n\nThe thesis implements this decomposition through a **piecewise-smooth approach** [1][2]:\n\n- The non-autonomous dynamics are formulated as a sequence of temporally local autonomous systems\n- These \"snapshot vector fields\" approximate the time-dependent vector field within specific time segments\n- Transitions between consecutive parameter regimes are regularized by a continuity prior to enforce smoothness\n\n## Functional Advantages\n\nThis decomposition enables several key capabilities [1][2][3]:\n\n1. **Functional separation** of different sources of non-stationarity into internally and externally induced transitions\n2. **Hierarchical case distinction** that constructs a tree of dynamical regimes\n3. **Independent analysis** - each combination of cases can be analyzed as autonomous dynamical systems in terms of their attractor structure\n4. **Twofold decomposition** into temporally local autonomous cases (snapshot parameters) and cases driven by external inputs\n\nThe thesis notes this approach is particularly useful because synaptic changes and sensory stimulation work on different time scales, making this conceptual division practically meaningful [3][6].",
+      "generated_answer": "Based on the provided context, the thesis decomposes non-autonomy into two distinct sources through a piecewise-smooth approach:\n\n## Two Sources of Non-Autonomy\n\nThe pePLRNN model decomposes non-autonomy into:\n\n1. **Temporal changes in internal system parameters** (e.g., reflecting plasticity) - referred to as parameter non-stationarity [1][2]\n2. **Modulation by external inputs** (e.g., stimulus-driven perturbations) - referred to as input-driven non-stationarity [1][2]\n\n## Piecewise-Smooth Decomposition Method\n\nThe central approach involves formulating non-autonomous dynamics as \"a sequence of temporally local autonomous systems\" where:\n\n- Local systems create \"snapshot vector fields\" that approximate the time-dependent vector field within specific time segments [2]\n- These are regularized by a continuity prior to enforce smooth transitions between consecutive parameter regimes [1][2]\n- This creates a \"piecewise-smooth decomposition\" [1][2]\n\n## Functional Separation and Analysis\n\nThis decomposition structure provides several analytical advantages:\n\n- **Functional separation**: It enables separating \"internally and externally induced transitions\" [1][2]\n- **Hierarchical case distinction**: Creates \"a tree of dynamical regimes, isolating the effects different sources of non-stationarity\" [1]\n- **Independent analysis**: Each case can be \"independently analyzed as autonomous DS in terms of their attractor structure\" [5]\n\nThe thesis notes that this decomposition is particularly effective because \"both processes (the synaptical changes and sensory stimulation) work on different time scales\" [3], making the conceptual separation practically viable.\n\nThis approach allows researchers to treat parts of inherently non-autonomous neural processes as autonomous dynamical systems for analysis purposes [2][3][5].",
       "retrieval_scores": [
-        0.5239764451980591,
+        0.5344415307044983,
         0.5001153945922852,
         0.4978923201560974,
-        0.48348915576934814,
-        0.47460806369781494,
+        0.4834008812904358,
+        0.47465187311172485,
         0.45100170373916626
       ],
       "eval_scores": {
         "retrieval_relevance": {
           "score": 0.9,
-          "reason": "The top chunks directly address how the thesis decomposes non-autonomy, with chunks 1 and 2 containing the exact decomposition into two sources, and other chunks providing supporting context about the pePLRNN model and its application to non-stationary systems."
+          "reason": "All retrieved chunks directly address the decomposition of non-autonomy, with chunks 1-2 explicitly describing the two-source decomposition and piecewise-smooth approach. Chunks 3-5 provide supporting context about the overall thesis approach. Only minor relevance loss due to some general discussion content."
         },
         "faithfulness": {
           "score": 0.95,
-          "reason": "Nearly all claims are directly supported by the retrieved context. The answer accurately reflects the two-source decomposition, the piecewise-smooth approach, and the functional advantages described in the context. Only minor organizational elements are added for clarity."
+          "reason": "Nearly all claims are directly supported by the context. The answer accurately represents the two sources (internal parameters vs external inputs), the piecewise-smooth decomposition method, and the snapshot approach. Minor deduction for some paraphrasing that slightly reorganizes the information."
         },
         "answer_completeness": {
-          "score": 0.8,
-          "reason": "The answer covers the main decomposition into two sources (internal parameter changes and external inputs) and mentions different timescales. However, it doesn't explicitly state the 'fast external inputs vs slow internal changes' timescale distinction or the 'locally autonomous snapshot system' terminology from the expected answer."
+          "score": 0.7,
+          "reason": "The answer covers the two main sources of non-autonomy and the decomposition approach well. However, it doesn't explicitly mention the key timescale distinction (fast external inputs vs slow internal changes) or the 'locally autonomous snapshot system' concept that are central to the expected answer."
         },
         "hallucination_free": {
           "score": 0.9,
-          "reason": "The answer stays very close to the source material. The structural organization and section headers are reasonable interpretive additions, but all substantive claims about the decomposition method and its advantages are grounded in the retrieved context."
+          "reason": "The answer stays very close to the source material with proper citations. The structural organization and terminology used (like 'piecewise-smooth decomposition') are directly from the context. Minor deduction for some interpretive framing that goes slightly beyond direct quotes."
         }
       },
-      "latency_s": 16.44
+      "latency_s": 17.07
     },
     {
       "id": "q03",
       "question": "What is the main finding about how the brain implements rule learning?",
       "category": "results",
       "expected_answer": "Rule learning is implemented via stimulus-dependent attracting region relocation in neural state space, not through creation of new stable attractors. The existing attracting region shifts location to redirect neural trajectories toward the correct decision under the new rule.",
-      "generated_answer": "Based on the provided context, the main finding about how the brain implements rule learning is that **rule learning is implemented through a shift in the state space localization of stimulus-dependent attracting regions** [1, 2].\n\nSpecifically, the research demonstrates several key aspects of this mechanism:\n\n1. **Spatial shift mechanism**: The primary dynamic mechanism behind rule learning involves attracting regions moving to different locations in state space rather than changing their fundamental structure [1, 2].\n\n2. **Single attracting regions**: Both rules are implemented as single attracting regions that depend on stimulus and rule context, with no evidence of multistability [1, 2].\n\n3. **Abrupt transitions**: Neural dynamics, parameters, attracting region locations, and behavior all undergo sudden, abrupt transitions during learning rather than gradual adaptations [1, 3].\n\n4. **Rule-specific reconfiguration**: During rule switching, there is a rule-specific reconfiguration of stimulus representations in the underlying neural dynamics, where the same cue inputs are either treated as behaviorally relevant or functionally collapsed [4].\n\n5. **Task structure dependence**: The specific experimental structure influences the implementation mechanism - continuous stimulus tasks use single, stimulus-dependent attracting regions that shift location, while tasks with delay periods implement multistable attracting region mechanisms [3].\n\nThis finding was validated by showing that changes in initial condition distributions have no significant impact on behavioral outcomes, confirming that the location shift of attracting regions is indeed the primary mechanism [1, 2].",
+      "generated_answer": "Based on the provided context, the main finding about how the brain implements rule learning is that **rule learning is implemented through shifts in the state space localization of stimulus-dependent attracting regions** [1].\n\nSpecifically, the research reveals several key aspects of this mechanism:\n\n1. **Shift-based mechanism**: During stable performance under both rules (visual rule and spatial rule), the brain uses stimulus-dependent attracting regions that guide neural trajectories toward different decisions. When transitioning between rules, these attracting regions shift their location in state space rather than changing through other mechanisms [1,3].\n\n2. **Abrupt rather than gradual transitions**: The reconstructed dynamics show that \"neural dynamics, snapshot parameters, attracting region locations, and behavior all undergo abrupt transitions during learning, rather than gradual adaptations\" [1,2]. These neural and dynamical changes consistently precede the actual behavioral change.\n\n3. **Asymmetric shifts**: The shift is not symmetric across stimuli - \"the attracting region associated with the SRES underwent a significantly larger displacement than the region associated with the SRRS\" [3,6].\n\n4. **Rule-specific implementation**: Under the visual rule, different stimuli lead trajectories toward distinct attracting regions with different behavioral outcomes. Under the spatial rule, both stimuli still have distinct attracting regions, but both guide trajectories toward the same decision [3].\n\nThis finding was validated by showing that changes in initial conditions have no significant impact on the resulting behavioral distribution, confirming that the location shift of attracting regions is indeed the primary mechanism underlying rule learning [1].",
       "retrieval_scores": [
-        0.6787310838699341,
-        0.6775221824645996,
-        0.6752324104309082,
-        0.6623198986053467,
-        0.658683180809021,
-        0.6545743346214294
+        0.6900236010551453,
+        0.6757658123970032,
+        0.665913999080658,
+        0.6626824140548706,
+        0.6589434742927551,
+        0.6551194190979004
       ],
       "eval_scores": {
         "retrieval_relevance": {
           "score": 1.0,
-          "reason": "All retrieved chunks are highly relevant to the question about brain implementation of rule learning, containing detailed information about attracting regions, neural dynamics, and the specific mechanisms involved in rule learning."
+          "reason": "All retrieved chunks are highly relevant to the question about brain implementation of rule learning, containing detailed information about the dynamical mechanisms, attracting regions, and neural state space changes during rule learning."
         },
         "faithfulness": {
           "score": 1.0,
-          "reason": "Every claim in the generated answer is directly supported by the retrieved context, with proper citations to specific chunks. All statements about attracting region shifts, single vs. multistable regions, abrupt transitions, and task structure dependence are found in the context."
+          "reason": "Every claim in the generated answer is directly supported by the retrieved context, with appropriate citations to specific chunks. The answer accurately reflects the research findings without adding unsupported information."
         },
         "answer_completeness": {
           "score": 0.8,
-          "reason": "The answer covers the main mechanism (attracting region location shift) and provides extensive additional detail, but doesn't explicitly state the key distinction that existing attractors shift rather than new ones being created, which is emphasized in the expected answer."
+          "reason": "The answer covers the main mechanism (attracting region shifts) and provides good detail about the process. However, it doesn't explicitly state that new stable attractors are NOT created, which is a key distinction mentioned in the expected answer."
         },
         "hallucination_free": {
           "score": 1.0,
-          "reason": "The answer contains no fabricated information and all details are grounded in the provided context. The generated answer stays within the bounds of what is described in the retrieved chunks."
+          "reason": "The answer contains no fabricated information and stays strictly within the bounds of what is described in the retrieved context. All technical details and findings are accurately represented."
         }
       },
-      "latency_s": 13.8
+      "latency_s": 13.49
     },
     {
       "id": "q04",
       "question": "Do neural transitions during learning happen gradually or abruptly?",
       "category": "results",
       "expected_answer": "Neural and dynamical transitions are abrupt and precede behavioral change points. The brain reorganizes its computational architecture before behavior visibly changes, supporting the sudden insight hypothesis.",
-      "generated_answer": "Based on the provided context, neural transitions during learning happen **abruptly, not gradually**.\n\nThis is consistently reported across multiple passages:\n\nFrom passage [1]: \"All three quantities [stimulus-dependent attractors, model parameters, and neural activity] exhibited abrupt transitions, indicating shifts in the underlying neural dynamics.\"\n\nFrom passage [2]: \"Trial-to-trial analyses of the reconstructed dynamics reveal that neural dynamics, snapshot parameters, attracting region locations, and behavior all undergo abrupt transitions during learning, rather than gradual adaptations.\"\n\nFrom passage [3]: \"Trial-by-trial analyses of parameter evolution, location of attracting region in decision space, neural activity, and behavioral output showed significant CPs [change points] after the rule change. These CPs occurred abruptly rather than gradually.\"\n\nAdditionally, the research shows that these abrupt neural transitions actually **precede** behavioral changes. As stated in passage [1]: \"CPs extracted from the model dynamics consistently preceded behavioral CPs,\" and in passage [3]: \"Changes in parameters and neural firing patterns systematically preceded the behavioral transition.\"\n\nThe authors interpret this pattern as supporting \"the hypothesis that rule learning is accompanied by sudden transitions in neural states and moments of sudden insight rather than slow adaptation\" [3], suggesting that the brain undergoes representational changes before behavioral adaptation occurs.",
+      "generated_answer": "Based on the provided context, neural transitions during learning happen **abruptly** rather than gradually.\n\nThis finding is consistently reported across multiple passages:\n\nFrom passage [1]: \"Trial-to-trial analyses of the reconstructed dynamics reveal that neural dynamics, snapshot parameters, attracting region locations, and behavior all undergo **abrupt transitions** during learning, **rather than gradual adaptations**.\"\n\nPassage [2] confirms this pattern: \"All three quantities [stimulus-dependent attractors, model parameters, and neural activity] exhibited **abrupt transitions**, indicating shifts in the underlying neural dynamics.\"\n\nPassage [3] provides additional detail about the temporal sequence: \"Trial-by-trial analyses of parameter evolution, location of attracting region in decision space, neural activity, and behavioral output showed significant CPs [change points] after the rule change. These CPs occurred **abruptly rather than gradually**. Changes in parameters and neural firing patterns systematically **preceded the behavioral transition**.\"\n\nThis finding supports theories of sudden insight rather than gradual adaptation in learning. Importantly, the neural changes (including changes in parameters, attractor locations, and neural activity) consistently occur before the behavioral changes, suggesting that the brain undergoes representational changes before behavioral adaptation becomes apparent [1, 3].\n\nThe abrupt nature of these transitions was observed across \"neural dynamics, snapshot parameters, attracting region locations, and behavior\" simultaneously, indicating a coordinated sudden shift in the underlying computational mechanisms rather than a slow, incremental learning process [1, 5].",
       "retrieval_scores": [
-        0.6726518273353577,
-        0.665428102016449,
+        0.6690115928649902,
+        0.6680866479873657,
         0.6553249359130859,
-        0.6346669793128967,
+        0.6245554685592651,
         0.624208927154541,
         0.623134970664978
       ],
       "eval_scores": {
         "retrieval_relevance": {
           "score": 1.0,
-          "reason": "All retrieved chunks directly address neural transitions during learning, containing specific evidence about whether changes are gradual or abrupt, with detailed analysis of change points and their timing relative to behavioral changes."
+          "reason": "All retrieved passages directly address neural transitions during learning, with multiple explicit statements about abrupt vs gradual changes, making them highly relevant to the question."
         },
         "faithfulness": {
           "score": 1.0,
-          "reason": "Every claim in the generated answer is directly supported by specific quotes from the context. The answer accurately cites passages about abrupt transitions, change points, and the precedence of neural changes over behavioral changes."
+          "reason": "Every claim in the generated answer is directly supported by quoted text from the retrieved context, with accurate citations to specific passages."
         },
         "answer_completeness": {
           "score": 1.0,
-          "reason": "The generated answer fully covers all key aspects of the expected answer: neural transitions are abrupt (not gradual), they precede behavioral changes, and this supports the sudden insight hypothesis. The answer provides comprehensive evidence for each point."
+          "reason": "The answer fully covers all key points from the expected answer: transitions are abrupt (not gradual), neural changes precede behavioral changes, and this supports the sudden insight hypothesis."
         },
         "hallucination_free": {
           "score": 1.0,
-          "reason": "The generated answer contains no fabricated information. All claims are directly extracted from or closely paraphrased from the provided context, with accurate quotations and proper attribution to specific passages."
+          "reason": "The answer contains no fabricated information - all statements are directly quoted or accurately paraphrased from the provided context with proper attribution."
         }
       },
-      "latency_s": 11.07
+      "latency_s": 12.18
     },
     {
       "id": "q05",
       "question": "What is the mirage reconstruction problem?",
       "category": "methodology",
       "expected_answer": "Mirage reconstruction occurs when a model produces accurate trajectory fits but infers a completely wrong mechanism. The model exploits input structure to bypass learning the true internal dynamics. Input design fundamentally determines the reconstructed dynamical mechanism.",
-      "generated_answer": "Based on the provided context, the \"mirage reconstruction problem\" is a critical methodological issue in dynamical systems reconstruction that occurs when inappropriate input assumptions lead to misleading results [1].\n\nThe problem manifests when **continuous-cue stimulus inputs are used instead of impulse vectors** to reconstruct neural dynamics, particularly in tasks that originally required memory. In this scenario:\n\n**What happens:**\n- The model appears to fit the data accurately but fails to reflect the system's true internal mechanisms [1]\n- Instead of learning complex autonomous dynamics, the model assigns task information directly from external inputs, creating \"degenerate reconstruction\" [1]\n- The reconstruction reproduces observed trajectories through **input-driven mappings rather than uncovering genuine latent dynamics** [1]\n\n**Why it occurs:**\n- When the input matrix provides more information than the original system had, it reduces task-specific constraints from internal dynamics [1]\n- The flexible pePLRNN model exploits these increased degrees of freedom to optimize reconstruction that relies on \"unrealistic assumptions, effectively bypassing attractor formation\" [1]\n- This introduces a **simplicity bias**, favoring direct input-to-output mappings over the internally sustained computations that were actually necessary in the biological system [1]\n\n**The key insight:**\nThe reconstruction appears successful on the surface (\"mirage\") but the **inferred mechanism does not correspond to the one implemented by the biological system** [1]. This highlights that experimental assumptions and input encoding can fundamentally alter reconstructed mechanisms, and that input design must be treated as part of the modeling hypothesis rather than a technical detail.",
+      "generated_answer": "Based on the provided context, the \"mirage reconstruction\" problem is a critical issue in dynamical systems reconstruction where the model appears to accurately fit the data but fails to uncover the true underlying mechanisms of the biological system [1].\n\n## Key Characteristics of Mirage Reconstruction:\n\n**Definition**: Mirage reconstruction occurs when a model \"reproduces observed trajectories through input-driven mappings rather than uncovering the true latent dynamics\" [1]. The reconstruction may appear accurate statistically but does not reflect the system's actual internal mechanisms.\n\n**Root Cause**: This problem arises when too much information is embedded in the input design. Specifically, when \"the input matrix provides more information to the system than the original system has (e.g., the continuous-cue stimulus for a memory-requiring task)\" [1]. This reduces the constraints that would normally come from internal dynamics.\n\n**Mechanism**: The pePLRNN model exploits the increased degrees of freedom from over-informative inputs to \"optimize a reconstruction that relies on unrealistic assumptions, effectively bypassing attractor formation\" [1]. This creates a simplicity bias that favors \"direct mappings from input to output over internally sustained computations, even when the latter may have been necessary in the original system\" [1].\n\n**Consequences**: The resulting model loses its diagnostic power to detect genuine latent dynamics, producing interpretations that don't correspond to the biological system's actual computational mechanisms.\n\n## Critical Methodological Implication:\n\nThe thesis emphasizes that \"input design must be treated as part of the modeling hypothesis\" and that \"reconstructions should be evaluated not only by their fit to the data but also by whether the underlying architecture imposes unjustified shortcuts that bias the interpretation of the latent system\" [1].\n\nThis problem highlights why experimental assumptions about input structure are fundamental to obtaining meaningful dynamical systems reconstructions.",
       "retrieval_scores": [
         0.44302821159362793,
         0.3882317543029785,
         0.3863058090209961,
         0.3761271834373474,
-        0.37468522787094116,
-        0.3739404082298279
+        0.3739404082298279,
+        0.37378668785095215
       ],
       "eval_scores": {
         "retrieval_relevance": {
           "score": 0.9,
-          "reason": "The top retrieved chunks are highly relevant, with chunk [1] directly defining mirage reconstruction and chunks [2-3] providing detailed examples of how input design affects reconstruction outcomes. Chunks [4-6] provide additional context about reconstruction methods, though slightly less directly relevant."
+          "reason": "The first chunk directly defines and explains mirage reconstruction in detail. Chunks 2-4 provide supporting evidence about how input design affects reconstruction outcomes. Chunk 5 covers general DSR background which is somewhat relevant. Chunk 6 briefly mentions input structure influence. Overall highly relevant with minor tangential content."
         },
         "faithfulness": {
-          "score": 0.95,
-          "reason": "Nearly all claims in the answer are directly supported by the retrieved context, particularly chunk [1] which contains the key definition and explanation of mirage reconstruction. The answer accurately quotes and paraphrases the source material without distortion."
+          "score": 1.0,
+          "reason": "Every claim in the generated answer is directly supported by and accurately quotes from the retrieved context. All quotes are properly attributed with [1] references and the explanations faithfully represent the source material without distortion."
         },
         "answer_completeness": {
-          "score": 0.85,
-          "reason": "The answer covers the core concept that mirage reconstruction produces accurate fits but wrong mechanisms, and explains how input structure determines the reconstruction. However, it focuses heavily on the specific continuous vs impulse input example rather than presenting the more general principle stated in the expected answer."
+          "score": 0.95,
+          "reason": "The answer thoroughly covers all three main points from the expected answer: accurate trajectory fits with wrong mechanisms, exploitation of input structure to bypass true dynamics, and input design determining reconstructed mechanisms. The answer provides extensive detail and examples, though it could be slightly more concise in emphasizing the core definition."
         },
         "hallucination_free": {
-          "score": 0.9,
-          "reason": "The answer stays very close to the provided context and uses direct quotes appropriately. The specific focus on continuous-cue vs impulse vectors is supported by the context, though this emphasis may be more specific than what the question was asking for."
+          "score": 1.0,
+          "reason": "The answer contains no fabricated information. All technical terms, explanations, and claims are grounded in the provided context. The structured presentation and detailed explanations all stem directly from the source material without adding unsupported details."
         }
       },
-      "latency_s": 15.16
+      "latency_s": 16.37
     },
     {
       "id": "q06",
       "question": "How was the pePLRNN validated on synthetic benchmarks?",
       "category": "validation",
       "expected_answer": "The pePLRNN was validated on chaotic benchmarks including logistic map bifurcation diagrams and bursting neuron models, as well as task-trained RNNs, before application to neural recordings.",
-      "generated_answer": "Based on the provided context, the pePLRNN was validated on two main synthetic benchmarks:\n\n## 1. Logistic Map Reconstruction\n\nThe pePLRNN was tested on the logistic map system [1]:\n- **System**: xt+1 = rxt(1-xt) where xt ∈ [0,1] and r ∈ [0,4] is the bifurcation parameter\n- **Test conditions**: Four distinct parameter values r ∈ {2.8, 3.2, 3.5, 3.9} corresponding to different dynamical regimes (one fixed point, 2-cycle, 4-cycle, and chaos)\n- **Bifurcation dataset**: 50 values of r linearly spaced between 2.5 and 4.0 to test the model's ability to capture transitions across qualitative dynamics\n\nThe results showed that \"the reconstructed bifurcation diagram of the logistic map illustrates that the model is capable of mapping the structure of a DS across different qualitative regimes, provided that regularization is appropriately tuned\" [3].\n\n## 2. Task-Trained RNN Reconstruction\n\nThe pePLRNN was validated by reconstructing hidden dynamics from simple RNNs trained on an artificial rule-learning task [2,4]:\n- **Setup**: Simple RNNs were trained on a sequence-to-sequence version of the rule-learning task, first learning a visual rule (VR), then switching to a spatial rule (SR)\n- **Validation metrics**: The best-performing models were selected based on \"a combined evaluation of trajectory reconstruction correlation and behavioral accuracy\" [1]\n\n**Key validation results** [2]:\n- High correlations between true and reconstructed trajectories on test data\n- Fixed-points extracted from reconstructed systems closely matched the original RNN across all conditions\n- Preserved the original system's geometry in full state space\n- Behavioral outputs decoded from reconstructed dynamics matched the original without direct training on task labels\n\n## Additional Validation\n\nThe approach was further tested on continuous-time systems, confirming \"the model's capacity to recover both simple and complex attracting region geometries, including cycles and chaotic trajectories\" [3].\n\nThese benchmark reconstructions demonstrated that \"the pePLRNN provides a tractable and in-principle usable approach for reconstructing DSs with non-stationarity from observational data alone\" [3].",
+      "generated_answer": "Based on the provided context, the pePLRNN was validated on several synthetic benchmarks:\n\n## Logistic Map Validation\n\nThe pePLRNN was tested on the logistic map system [1], which provides a well-understood dynamical system with known bifurcation behavior. The validation involved:\n\n- **Multiple dynamical regimes**: Time series of length T = 5000 were generated for four distinct parameter values r ∈ {2.8, 3.2, 3.5, 3.9}, corresponding to qualitatively different dynamical regimes (one fixed point, 2-cycle, 4-cycle and chaos) [1]\n\n- **Bifurcation dataset**: A more comprehensive dataset was created with 50 values of r linearly spaced between 2.5 and 4.0 to test the model's ability to capture transitions in qualitative dynamics across parameter ranges [1]\n\n- **Successful reconstruction**: The results showed that \"the reconstructed bifurcation diagram of the logistic map illustrates that the model is capable of mapping the structure of a DS across different qualitative regimes, provided that regularization is appropriately tuned\" [3]\n\n## Bursting Neuron Model\n\nThe model was also tested on a bursting neuron model, though the specific details are not provided in these passages [6].\n\n## Continuous-Time Systems\n\nAdditional validation was performed on continuous-time systems, where \"further simulations with continuous-time systems confirmed the model's capacity to recover both simple and complex attracting region geometries, including cycles and chaotic trajectories\" [3].\n\n## Task-Trained RNN Validation\n\nA more complex validation involved reconstructing hidden state trajectories from RNNs trained on an artificial rule-learning task [2]. This validation showed:\n\n- **High reconstruction accuracy**: \"The pePLRNN accurately reconstructed the hidden dynamics underlying the rule-learning task\" with \"high correlations between true and reconstructed trajectories\" [2]\n\n- **Preservation of system properties**: The model preserved fixed-points, system geometry, and behavioral outputs without being explicitly trained on them [2]\n\nThe context indicates that these benchmark reconstructions collectively \"demonstrate that the pePLRNN provides a tractable and in-principle usable approach for reconstructing DSs with non-stationarity from observational data alone\" [3].",
       "retrieval_scores": [
         0.5919193029403687,
-        0.5910786390304565,
-        0.5836082100868225,
-        0.5818027257919312,
+        0.591078519821167,
+        0.5837443470954895,
         0.580284595489502,
+        0.5801063776016235,
         0.5731829404830933
       ],
       "eval_scores": {
         "retrieval_relevance": {
           "score": 0.9,
-          "reason": "All retrieved chunks directly discuss pePLRNN validation on synthetic benchmarks including logistic map, bursting neuron models (mentioned in chunk 6), and task-trained RNNs. Highly relevant to the question."
+          "reason": "All retrieved chunks are highly relevant to the validation question, covering logistic map experiments, task-trained RNN reconstruction, bursting neuron mentions, and validation methodology. Only minor details about specific implementation parameters are less directly relevant."
         },
         "faithfulness": {
-          "score": 1.0,
-          "reason": "Every claim in the generated answer is directly supported by the retrieved context with proper citations. All technical details, parameter values, and results are accurately extracted from the source material."
+          "score": 0.95,
+          "reason": "Nearly all claims are directly supported by the retrieved context with proper citations. The answer accurately reflects the logistic map validation, bifurcation experiments, task-trained RNN reconstruction, and continuous-time system validation mentioned in the source material."
         },
         "answer_completeness": {
-          "score": 0.8,
-          "reason": "The answer covers logistic map bifurcation diagrams and task-trained RNNs from the expected answer. However, it only briefly mentions bursting neuron models in passing rather than providing details about this validation benchmark."
+          "score": 0.85,
+          "reason": "The answer covers most key validation benchmarks mentioned in the expected answer: logistic map bifurcation diagrams, task-trained RNNs, and mentions bursting neuron model. However, it doesn't explicitly emphasize that this validation occurred 'before application to neural recordings' as stated in the expected answer."
         },
         "hallucination_free": {
-          "score": 1.0,
-          "reason": "The answer contains no fabricated information. All claims are grounded in the provided context with appropriate citations and accurate representation of the source material."
+          "score": 0.9,
+          "reason": "The answer stays very close to the source material without fabricating information. All major claims about validation methods, results, and conclusions are directly extracted from the context. Minor organizational structuring doesn't constitute hallucination."
         }
       },
-      "latency_s": 15.36
+      "latency_s": 16.7
     },
     {
       "id": "q07",
       "question": "What validation framework was designed for non-stationary data?",
       "category": "validation",
       "expected_answer": "A five-criterion validation framework was designed that exploits behaviorally stable periods as approximate stationarity windows, testing reconstruction accuracy, decoding preservation, non-stationarity capture, generalization, and physiological plausibility.",
-      "generated_answer": "Based on the provided context, a specific validation framework was designed for non-stationary neural data that consists of five key criteria [2][3][4]:\n\n## The Five-Criteria Validation Framework\n\n1. **Reconstruction accuracy** - Ensures the model can fit the observed data and is neither fundamentally underparameterized nor excessively regularized.\n\n2. **Preservation of task-relevant information** - Assesses whether task-relevant information encoding (such as stimulus, choice, or rule identity) is preserved in the model reconstructions, ensuring the model retains structured variability aligned with behaviorally meaningful dimensions.\n\n3. **Representation of non-stationarity** - Evaluates whether the model adequately captures non-stationarity in the latent dynamics. This criterion helps determine if the smoothness constraint is too high, which could suppress abrupt changes and obscure dynamic transitions.\n\n4. **Generalization to unseen data** - Tests how well the reconstructed system generalizes to unseen data segments under the assumption of approximate parameter stationarity. This addresses the challenge that standard validation techniques (like train-test splits) cannot be applied conventionally due to inherent non-stationarity.\n\n5. **Plausibility of latent dynamics** - Concerns the physiological plausibility of the reconstructed limit set structure, specifically excluding fixed point attractors during long-term simulations, as these are unlikely to represent realistic neural population dynamics.\n\n## Key Innovation for Non-Stationary Data\n\nThe framework addresses a fundamental challenge: \"Standard validation techniques (such as train-test splits) cannot be applied in this context due to the inherent non-stationarity of neural activity in learning animals\" [4]. To solve this, the approach identifies \"behaviorally stable periods before the rule transitions where parameter changes can be reasonably assumed to be minimal\" [2][3] for validation purposes.\n\nThis validation framework was specifically designed to assess the pePLRNN model's ability to reconstruct non-stationary neurophysiological data while accounting for both external sensory inputs and internal parameter reconfigurations [1].",
+      "generated_answer": "Based on the provided context, a specific validation framework was designed for non-stationary neurophysiological data consisting of five key criteria [2, 3]:\n\n## Five-Criterion Validation Framework\n\nThe validation framework includes these criteria:\n\n1. **Reconstruction accuracy** - Ensures the model can fit the data and is neither fundamentally under-parameterized nor over-regularized [2, 5]\n\n2. **Preservation of task-relevant information** - Assesses whether task-relevant information encoding (such as stimulus, choice, or rule identity) is preserved in model reconstructions, ensuring the model doesn't merely reproduce surface-level firing patterns but retains behaviorally meaningful structure [2, 3]\n\n3. **Representation of non-stationarity** - Evaluates whether the model adequately captures non-stationarity in latent dynamics, providing insight into whether smoothness constraints are appropriately set [2, 3]\n\n4. **Generalization to unseen data** - Tests how well the reconstructed system generalizes under the assumption of approximate parameter stationarity during behaviorally stable periods [2, 3]\n\n5. **Plausibility of latent dynamics** - Ensures physiological plausibility by excluding fixed point solutions, as these are unlikely to represent realistic neural population dynamics [2, 3]\n\n## Key Challenge Addressed\n\nThis framework was necessary because \"classical ML validation techniques, such as train-test splits (cross-validation), cannot be used in the conventional way in this context due to the inherent non-stationarity of neural data from learning animals\" [2, 3]. The framework specifically addresses the challenge that parameter evolution through synaptic plasticity is part of the learning process, making temporal generalization ill-defined.\n\nThe validation was restricted to behaviorally stable periods where parameter changes could be assumed minimal, though this assumption remains fragile due to potential latent non-stationarities from physiological processes [2, 3].",
       "retrieval_scores": [
-        0.5313905477523804,
-        0.5293862223625183,
-        0.5080340504646301,
+        0.5316193699836731,
+        0.5299971699714661,
         0.5077605843544006,
         0.5022338628768921,
+        0.5011463761329651,
         0.479120135307312
       ],
       "eval_scores": {
         "retrieval_relevance": {
-          "score": 0.9,
-          "reason": "The retrieved context is highly relevant, with chunks 2-4 directly discussing the five-criteria validation framework for non-stationary data. Chunks 1 and 5 provide supporting context about non-stationarity and the pePLRNN model. Only chunk 6 about general DSR validation is less directly relevant."
+          "score": 1.0,
+          "reason": "All retrieved chunks are highly relevant, discussing validation frameworks for non-stationary data, the five-criterion validation system, and the challenges of validating models on non-stationary neurophysiological data."
         },
         "faithfulness": {
           "score": 1.0,
-          "reason": "Every claim in the answer is directly supported by the retrieved context. The five criteria are accurately described with proper citations, and all quotes and technical details match the source material exactly."
+          "reason": "Every claim in the answer is directly supported by the retrieved context. All five criteria are explicitly mentioned in chunks 2 and 3, with detailed explanations matching the context exactly."
         },
         "answer_completeness": {
           "score": 1.0,
-          "reason": "The answer fully covers all key points from the expected answer: identifies the five-criterion validation framework, explains that it exploits behaviorally stable periods as approximate stationarity windows, and lists all five criteria (reconstruction accuracy, decoding preservation, non-stationarity capture, generalization, and physiological plausibility)."
+          "reason": "The answer completely covers all key points from the expected answer: identifies the five-criterion framework, mentions behaviorally stable periods as approximate stationarity windows, and lists all five validation criteria (reconstruction accuracy, decoding preservation, non-stationarity capture, generalization, and physiological plausibility)."
         },
         "hallucination_free": {
           "score": 1.0,
-          "reason": "The answer contains no fabricated information. All technical details, descriptions of the criteria, and explanations of the framework's approach to handling non-stationary data are directly grounded in the provided context."
+          "reason": "No fabricated information is present. All details, including the specific challenges with conventional validation methods and the use of behaviorally stable periods, are directly extracted from the provided context."
         }
       },
-      "latency_s": 15.4
+      "latency_s": 14.95
     },
     {
       "id": "q08",
       "question": "How was effective connectivity estimated in the thesis?",
       "category": "methodology",
       "expected_answer": "Effective connectivity was estimated through Jacobian product analysis along simulated trajectories to derive connectivity distributions, then similarity analysis was used to extract graph structure and identify functional assemblies.",
-      "generated_answer": "Based on the provided context, effective connectivity was estimated through the following procedure:\n\n## Core Method [1]\n\nEffective connectivity was extracted by generating latent trajectories from trained models and computing local Jacobians at each time point. The local Jacobian ∂z_{t+1}/∂z_t takes the form:\n\nJ_t = A + W₁^(k) diag[φ'(W₂^(k)z_t + h₂) - φ'(W₂^(k)z_t)] W₂^(k)\n\nWhich simplifies to:\nJ_t = A + W₁^(k) D_t W₂^(k)\n\nwhere D_t is a diagonal indicator matrix encoding the local subregion.\n\n## Cumulative Effect Calculation [1]\n\nTo capture cumulative effects across time, the time-ordered product of Jacobians was computed for each trajectory:\n\nJ_eff = ∏_{t=1}^T J_t\n\nThis matrix summarizes the net influence of latent unit interactions across the entire trajectory.\n\n## Averaging and Thresholding [1]\n\nThe effective connectivity estimate was obtained by averaging J_eff across multiple generated trajectories:\n\nJ̄_eff = (1/N) ∑_{i=1}^N J_eff^(i)\n\nTo focus on dominant interaction patterns, each J̄_eff was thresholded by retaining only the top 10% of absolute weight magnitudes (excluding diagonal elements), creating a binary connectivity graph.\n\n## Trial-by-Trial Implementation [2,4]\n\nFor trial-by-trial analysis, connectivity was estimated by:\n- Generating 500 short trajectories from trial-specific initial states [4]\n- Using trial-specific parameters W₁^(k), W₂^(k) for each trial [4] \n- Computing the product of Jacobians along each trajectory\n- Averaging across trajectories to get mean effective connectivity per trial [2]\n- Thresholding to retain top 5-10% of weights [1,4]\n\n## Similarity Analysis [1]\n\nTo compare connectivity patterns across trials, pairwise Jaccard similarity was computed between thresholded adjacency graphs:\n\nJaccard(i,j) = |E_i ∩ E_j| / |E_i ∪ E_j|\n\nwhere E_i and E_j are the sets of edges from trials i and j, respectively.\n\nThis method allowed the researchers to track how effective connectivity reorganized during learning and rule transitions [2,3].",
+      "generated_answer": "Based on the provided context, effective connectivity was estimated through the following multi-step process:\n\n## Method Overview\n\nEffective connectivity was extracted from trained models by generating latent trajectories and computing local Jacobians at each time point [1].\n\n## Step-by-Step Process\n\n1. **Local Jacobian Computation**: For each time point t along a trajectory, the local Jacobian ∂z_{t+1}/∂z_t was computed, taking the form:\n   ```\n   J_t = A + W₁^(k) diag[φ'(W₂^(k)z_t + h₂) - φ'(W₂^(k)z_t)] W₂^(k)\n   ```\n   Which simplifies to:\n   ```\n   J_t = A + W₁^(k) D_t W₂^(k)\n   ```\n   where D_t is a diagonal indicator matrix encoding the local subregion [1].\n\n2. **Cumulative Effect Calculation**: To capture the cumulative effect of local interactions across time, the time-ordered product of Jacobians was computed for each trajectory:\n   ```\n   J_eff = ∏_{t=1}^T J_t\n   ```\n   This matrix summarizes the net influence of latent unit interactions across the trajectory [1].\n\n3. **Averaging Across Trajectories**: The effective connectivity estimate was obtained by averaging J_eff across multiple generated trajectories:\n   ```\n   J̄_eff = (1/N) Σᵢ₌₁ᴺ J_eff^(i)\n   ```\n   [1].\n\n## Implementation Details\n\n- **Trial-by-trial analysis**: For trial-specific connectivity, 500 trajectories were simulated for each trial using the corresponding parameters W₁^(k), W₂^(k) assigned to that trial [4].\n\n- **Thresholding**: To focus on dominant interaction patterns, each J̄_eff was thresholded by retaining only the top 10% (or 5% in some analyses) of absolute weight magnitudes, excluding diagonal elements. The resulting binary matrix was interpreted as a connectivity graph [1,4].\n\n- **Similarity Analysis**: Pairwise Jaccard similarity was computed between thresholded adjacency graphs to compare effective functional connectivity structure across trials [1].\n\nThis method allowed researchers to track how effective connectivity patterns changed during learning, particularly around behavioral change points [2,3].",
       "retrieval_scores": [
         0.6513767242431641,
-        0.6179169416427612,
+        0.6177741289138794,
         0.591301441192627,
         0.5811220407485962,
-        0.555533766746521,
+        0.5555338263511658,
         0.5540287494659424
       ],
       "eval_scores": {
         "retrieval_relevance": {
           "score": 0.9,
-          "reason": "The top chunks are highly relevant, with chunks 1, 2, and 3 directly addressing effective connectivity estimation methods. Chunks 4 and 6 provide supporting methodological details. Only chunk 5 is less relevant as it shows results rather than methods."
+          "reason": "The top chunks are highly relevant, containing detailed methodology for effective connectivity estimation including Jacobian computation, trajectory generation, and similarity analysis. Minor deduction as some chunks contain tangential information about statistical methods."
         },
         "faithfulness": {
-          "score": 0.95,
-          "reason": "Nearly all claims are directly supported by the retrieved context, including the mathematical formulations, procedural steps, and implementation details. The answer accurately represents the Jacobian computation, time-ordered products, averaging, and similarity analysis methods described in the source material."
+          "score": 1.0,
+          "reason": "Every technical detail, equation, and methodological step in the generated answer is directly supported by and accurately reflects the information in the retrieved context. All formulas and implementation details are faithfully reproduced."
         },
         "answer_completeness": {
-          "score": 0.85,
-          "reason": "The answer covers the key components from the expected answer: Jacobian product analysis along trajectories and similarity analysis for graph structure extraction. However, it provides much more technical detail than the expected answer, which mentioned 'connectivity distributions' and 'functional assemblies' - concepts that are implied but not explicitly emphasized in the generated response."
+          "score": 0.8,
+          "reason": "The answer covers the main components: Jacobian product analysis along trajectories and similarity analysis for graph structure extraction. However, it doesn't explicitly mention 'connectivity distributions' or 'functional assemblies' as stated in the expected answer, though these concepts are implicitly covered."
         },
         "hallucination_free": {
-          "score": 0.95,
-          "reason": "The answer stays very close to the source material with accurate mathematical notation and procedural descriptions. No significant fabrications are present, though some minor organizational elements (like section headers) are added for clarity but don't misrepresent the content."
+          "score": 1.0,
+          "reason": "The answer contains no fabricated information. All claims, equations, implementation details, and methodological steps are directly extracted from and supported by the provided context."
         }
       },
-      "latency_s": 18.85
+      "latency_s": 16.73
     },
     {
       "id": "q09",
       "question": "What role do initial conditions play in rule learning?",
       "category": "results",
       "expected_answer": "Changes in initial conditions have no significant impact on rule learning. Parameter changes alone drive the behavioral shift. This was demonstrated through counterfactual simulations swapping initial conditions between rules while holding parameters fixed.",
-      "generated_answer": "Based on the provided context, initial conditions play a minimal role in rule learning, while parameter changes are the primary driver of behavioral shifts between rules.\n\n**Key findings about initial conditions:**\n\nFrom the controlled experiments described in passages [1] and [2], when researchers isolated the role of initial conditions by fixing the dynamic parameters and varying only the initial conditions across simulations, this \"had little to no effect on the choice discrimination value distribution across recorded sessions\" [2]. The discrimination-value shifts when swapping initial conditions showed \"no significant differences from zero\" [1].\n\n**Parameter changes are the main factor:**\n\nIn contrast, when initial conditions were fixed and parameters were exchanged, there was \"a highly significant increase in the distribution of choice discrimination values\" [2]. The analysis concluded that \"the change in parameters is the main factor for the change in behavioral outcome\" [2].\n\n**Mechanistic interpretation:**\n\nThe research demonstrates that rule learning is implemented through \"a shift in the state space localization of stimulus-dependent attracting regions\" rather than changes in starting states [3]. As stated in passage [4], during rule transitions, \"stimulus-specific attracting regions shifted their location in state space,\" and this location shift was \"further validated as the primary mechanism, by showing that changes in the initial condition distribution have no significant impact on the resulting behavioral distribution\" [3].\n\nThis indicates that cognitive flexibility in this task is achieved primarily through reconfiguring the underlying dynamical landscape (parameter changes) rather than simply starting from different initial neural states.",
+      "generated_answer": "Based on the context passages, initial conditions play a minimal role in rule learning, while parameter changes are the primary driver. Here are the key findings:\n\n## Minimal Impact of Initial Conditions\n\nThe thesis demonstrates that **initial conditions have little to no effect on behavioral outcomes** during rule learning [2]. When researchers isolated the role of initial conditions by fixing the dynamic parameters and varying only the initial conditions across simulations, this manipulation \"had little to no effect on the choice discrimination value distribution across recorded sessions\" [2].\n\nMore specifically, when initial conditions were swapped between rule conditions (while holding parameters fixed), the discrimination-value shifts showed \"no significant differences from zero\" across all sessions [1].\n\n## Parameters Are the Primary Factor\n\nIn stark contrast, **parameter changes are identified as the main factor driving behavioral changes** [2]. When initial conditions were fixed but parameters were exchanged between rules, there was \"a highly significant increase in the distribution of choice discrimination values\" [2]. The shift was particularly pronounced for the spatial-rule extinguished cue site compared to the reinforced site [1,2].\n\n## Mechanistic Understanding\n\nThe thesis concludes that rule learning is primarily implemented through **shifts in the state space localization of stimulus-dependent attracting regions** rather than changes in initial conditions [3]. The reconstructed neural dynamics showed that \"changes in the initial condition distribution have no significant impact on the resulting behavioral distribution,\" further validating that attracting region shifts are the primary mechanism [3].\n\n## Individual Differences in Starting Bias\n\nWhile initial conditions within the neural dynamics don't drive learning, the passages do mention that animals showed different learning trajectories based on their \"initial rule bias\" - with some starting with correct vs. incorrect response patterns [6]. However, this refers to behavioral starting points rather than neural initial conditions.\n\nIn summary, the thesis provides strong evidence that **parameter evolution, not initial condition changes, is the primary mechanism underlying rule learning** [2,3].",
       "retrieval_scores": [
-        0.5636395812034607,
+        0.5636609792709351,
         0.5394443273544312,
-        0.5377960205078125,
-        0.5285239815711975,
+        0.5314770340919495,
+        0.527378499507904,
         0.526260256767273,
         0.5219888091087341
       ],
       "eval_scores": {
         "retrieval_relevance": {
           "score": 1.0,
-          "reason": "All retrieved chunks are highly relevant, containing detailed experimental results about isolating initial conditions vs parameters in rule learning, counterfactual simulations, and the mechanistic basis of rule transitions."
+          "reason": "All retrieved chunks directly address the role of initial conditions vs parameters in rule learning, with specific experimental details about counterfactual simulations and their results."
         },
         "faithfulness": {
           "score": 1.0,
-          "reason": "Every claim in the answer is directly supported by the context with accurate quotes and citations. The statistical findings, experimental procedures, and conclusions all match the source material exactly."
+          "reason": "Every claim in the generated answer is directly supported by the retrieved context, with appropriate citations to specific passages about initial conditions having no significant effect and parameters being the main driver."
         },
         "answer_completeness": {
           "score": 1.0,
-          "reason": "The answer fully covers all key points from the expected answer: that initial conditions have no significant impact, that parameter changes drive behavioral shifts, and that this was demonstrated through counterfactual simulations with swapped conditions."
+          "reason": "The answer fully covers all key points from the expected answer: initial conditions have no significant impact, parameter changes drive behavioral shifts, and counterfactual simulations with swapped conditions were used to demonstrate this."
         },
         "hallucination_free": {
           "score": 1.0,
-          "reason": "The answer contains no fabricated information. All claims about experimental results, statistical significance, and mechanisms are accurately drawn from the provided context without adding unsupported details."
+          "reason": "All claims are grounded in the provided context with no fabricated information. The answer accurately represents the experimental findings and conclusions from the source material."
         }
       },
-      "latency_s": 13.85
+      "latency_s": 16.04
     },
     {
       "id": "q10",
       "question": "How do task-trained RNN mechanisms differ from neural recording mechanisms?",
       "category": "results",
       "expected_answer": "Both use input-driven attractor dynamics, but task-trained RNNs converge to fixed points while neural data shows complex, possibly chaotic, limit sets that modulate trajectory direction without enforcing convergence.",
-      "generated_answer": "Based on the provided context, I can identify several key differences between task-trained RNN mechanisms and neural recording mechanisms:\n\n## Computational Mechanism Differences\n\n**Task-trained RNNs (continuous input condition):**\n- Implement computation via **input-driven dynamics** where external inputs continuously guide trajectories toward single attractors [2]\n- Act essentially as **feedforward networks** mapping input to output when external information is continuously available [2]\n- Show **no qualitative changes in internal geometry** across different conditions - no bifurcations occur [2]\n- Do not require **internal memory traces or multistability** to implement the task [2]\n\n**Neural recordings from animals:**\n- Use a **monostable, input-driven mechanism** during stable task performance periods, but with different characteristics [5]\n- Each rule has **distinct patterns of stimulus-dependent attracting regions** that guide neural trajectories [5]\n- In the **autonomous system** (without external inputs), exhibit **no evidence of multistability** [5]\n- Show **abrupt transitions** in stimulus-dependent attractors, model parameters, and neural activity during learning on a trial-by-trial basis [5]\n\n## Behavioral and Learning Differences\n\n**Animal behavior** shows much more complexity:\n- **Substantial variability** in initial rule-bias and behavioral adaptation [1]\n- Animals may use **different strategies** to solve the task and develop models about the meta-structure of the experiment [1]\n- **Initial rule biases** could reflect internally maintained rule-specific representations that are **stable across sessions** [1]\n- The task probes not only learning during sessions but also **strategy selection under uncertainty** [1]\n\nThe key distinction appears to be that while both systems use input-driven mechanisms, the neural recordings show more complex learning dynamics with abrupt transitions and cross-session effects, whereas the task-trained RNNs (at least under continuous input conditions) implement simpler feedforward-like computations.",
+      "generated_answer": "Based on the provided context, there are several key differences between task-trained RNN mechanisms and neural recording mechanisms:\n\n## Computational Architecture Differences\n\n**Task-trained RNNs** [passages 3, 6]:\n- Use **input-driven dynamics** where external inputs continuously guide trajectories toward specific attractors\n- Can operate as \"feedforward networks\" when external information is continuously available [3]\n- Don't require internal memory traces or multistability when inputs are continuous [3]\n- Show **no qualitative changes in internal geometry** across different conditions (no bifurcations) [3]\n\n**Neural recordings from rats** [passage 6]:\n- Exhibit **monostable, input-driven mechanisms** during stable task performance\n- Have **stimulus-dependent attracting regions** that guide trajectories toward correct responses\n- Show **no evidence of multistability** in autonomous system (without external inputs)\n- Rely on stimulus-dependent attractors rather than intrinsic multistable systems [6]\n\n## Key Similarity and Difference\n\nInterestingly, both systems show **monostable, input-driven dynamics** during task performance. However, a crucial difference emerges in their **learning mechanisms**:\n\n- **Neural recordings**: Show \"abrupt transitions\" in stimulus-dependent attractors, model parameters, and neural activity during learning, \"indicating shifts in the underlying neural dynamics\" [6]\n\n- **Task-trained RNNs**: The context suggests their learning involves more gradual parameter changes, though specific details about abrupt vs. gradual transitions in RNNs are not fully elaborated in these passages.\n\n## Methodological Note\n\nThe context indicates that RNNs \"serve primarily to generate hypotheses about the dynamic principles of neural computation, rather than directly providing information about the DST underlying empirical neural data\" [1]. This suggests that while both systems may use similar computational strategies, the RNN mechanisms are designed to replicate task performance rather than directly mirror biological neural dynamics.\n\nThe passages don't provide enough detail to make more specific comparisons about other potential differences in their underlying mechanisms.",
       "retrieval_scores": [
+        0.6237460374832153,
         0.6221641302108765,
         0.6173398494720459,
-        0.6157001256942749,
+        0.6154569983482361,
         0.614788830280304,
-        0.6144647598266602,
-        0.6040124893188477
+        0.6144647598266602
       ],
       "eval_scores": {
         "retrieval_relevance": {
           "score": 0.8,
-          "reason": "Most chunks are highly relevant to the question about differences between task-trained RNNs and neural recordings. Chunks discuss RNN mechanisms, neural data analysis, and comparative aspects. However, some content about experimental parameters and animal behavior variability is less directly relevant to the core mechanistic comparison."
+          "reason": "Most retrieved chunks discuss task-trained RNNs and their mechanisms (chunks 1-6), with some information about neural recordings. However, the chunks don't directly compare the two mechanisms as requested, and lack specific details about neural data showing chaotic limit sets vs RNN fixed points."
         },
         "faithfulness": {
           "score": 0.9,
-          "reason": "Nearly all claims in the answer are directly supported by the retrieved context. The answer accurately quotes and paraphrases information about input-driven dynamics, feedforward behavior, monostable mechanisms, and learning characteristics from the source material."
+          "reason": "Nearly all claims are supported by the context, including input-driven dynamics, monostable mechanisms, and lack of multistability. The answer correctly cites specific passages and quotes. Minor deduction for some interpretive connections that go slightly beyond explicit statements."
         },
         "answer_completeness": {
           "score": 0.4,
-          "reason": "The answer partially addresses the expected answer but misses key distinctions. The expected answer specifically mentions that RNNs 'converge to fixed points' while neural data shows 'complex, possibly chaotic, limit sets that modulate trajectory direction without enforcing convergence.' The generated answer doesn't capture this crucial difference about convergence vs. non-convergent complex dynamics."
+          "reason": "The answer identifies input-driven dynamics in both systems but misses the key distinction from the expected answer: RNNs converging to fixed points vs neural data showing complex/chaotic limit sets. The answer focuses more on similarities than the crucial dynamical differences requested."
         },
         "hallucination_free": {
-          "score": 0.9,
-          "reason": "The answer stays very close to the provided context without adding fabricated information. All technical details and characterizations are drawn from the source material, though the organization and emphasis represent the author's interpretation of the retrieved information."
+          "score": 0.8,
+          "reason": "The answer stays largely within the context bounds and properly attributes information to specific passages. Minor deduction for some interpretive statements about learning mechanisms that extend slightly beyond what's explicitly stated in the context."
         }
       },
-      "latency_s": 18.24
+      "latency_s": 18.93
     }
   ]
 }
