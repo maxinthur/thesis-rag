@@ -2,9 +2,6 @@
 
 import anthropic
 import sys
-from unittest.mock import MagicMock
-sys.modules.setdefault('opentelemetry.exporter.otlp.proto.grpc.trace_exporter', MagicMock())
-sys.modules.setdefault('opentelemetry.exporter.otlp.proto.grpc.exporter', MagicMock())
 import chromadb
 import httpx
 
